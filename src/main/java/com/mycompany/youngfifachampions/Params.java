@@ -62,7 +62,10 @@ public class Params {
     
     //Path to configuration file
     private String CONF_FILE_PATH;
-
+    
+    //Do logs append file. If false then rewrite log
+    public Boolean IS_FILE_APPEND=true;
+    
     public Params(String pathToConfigurationFile) throws Exception, IOException {
 
         //Set path to configurationFile
@@ -206,6 +209,7 @@ public class Params {
      * @return
      */
     private Object tryToConvertValueToSpecifiedType(String value, Class type) {
+        
         //Boolean
         if (type == Boolean.class) {
             return Boolean.valueOf(value);

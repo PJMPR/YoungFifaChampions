@@ -27,23 +27,21 @@ public class YoungFifaChampions {
     public static void main(String[] args) {
 
         try {
-
+            //Params initialization
             if (args.length > 0) {
                 PARAMS = new Params(args[0]);
             } else {
                 PARAMS = new Params(null);
             }
         } catch (Exception e) {
-
             e.printStackTrace();
         }
-//        System.err.println(PARAMS.VERBOSE_MODE);
-//        System.err.println(PARAMS.PARAM_1);
-//        System.err.println(PARAMS.PARAM_2);
-//        System.err.println(PARAMS.PARAM_3);
-        System.err.println(PARAMS.getParameterValueByName("ANONYMOUS_PARAM").getClass());
-        System.err.println(PARAMS.getParameterValueByName("ANONYMOUS_PARAM2"));
-        //LOG = new Logger();
+        
+        //Initialize Logger
+        LOG = new Logger(PARAMS.LOG_FILE_PATH, PARAMS.IS_FILE_APPEND,PARAMS.VERBOSE_MODE);
+        
+        LOG.addLog("Main", Logger.LogType.DEBUG, "Stworzony logger");
+        LOG.addLog(null, YoungFifaChampions.class, Logger.LogType.WARRNING, null, "Test error");
 
     }
 
