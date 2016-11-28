@@ -17,7 +17,6 @@ public class Repositories {
 
     //ListOfRepositories
     private final List<RepositoryBase> repositoryList;
-
     
     public Repositories() {
         repositoryList = new ArrayList<>();
@@ -33,5 +32,18 @@ public class Repositories {
             repositoryList.add(repo);
         }
     }
+    
+    public RepositoryBase getRepositoryByClass(Class repositoryClass){
+        for(RepositoryBase repo:repositoryList){
+            if(repo.getClass()==repositoryClass){
+                //found repository
+                return repo;
+            }
+        }
+        
+        //No repository added
+        return null;
+    }
+    
 
 }

@@ -22,4 +22,6 @@ public interface IRepositorySqlGetter {
     public String getSql();
     
     public String createTableSql();
+    
+    public String tableName();
 }

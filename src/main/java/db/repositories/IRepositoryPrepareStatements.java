@@ -7,24 +7,22 @@ package db.repositories;
 
 import db.classes.IHaveId;
 import java.sql.SQLException;
-import java.util.List;
 
 /**
  *
  * @author Tmejs (mateusz.rzad@gmail.com)
  */
-public interface IRepository<TEntity extends IHaveId> {
+public interface IRepositoryPrepareStatements<TEntity extends IHaveId> {
 
-    public TEntity get(Integer id);
+    public void insertPrepare(TEntity entity);
 
-    public List<TEntity> getAll();
+    public void updatePrepare(TEntity entity);
 
-    public void delete(Integer id);
+    public void getAllPrepare();
 
-    public void update(TEntity entity);
+    public void deletePrepare(TEntity entity);
 
-    public void insert(TEntity entity);
+    public void getPrepare(TEntity entity);
 
-    public void createTableIfnotExists() throws SQLException;
 
 }

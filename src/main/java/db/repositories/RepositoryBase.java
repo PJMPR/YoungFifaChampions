@@ -14,12 +14,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 
 /**
  *
  * @author Tmejs (mateusz.rzad@gmail.com)
  */
-public abstract class RepositoryBase<TEntity extends IHaveId> implements IRepository<TEntity>, IRepositorySqlGetter {
+public abstract class RepositoryBase<TEntity extends IHaveId> implements IRepository<TEntity>, IRepositorySqlGetter,IRepositoryPrepareStatements<TEntity> {
 
     protected Connection connection;
 
@@ -52,8 +53,8 @@ public abstract class RepositoryBase<TEntity extends IHaveId> implements IReposi
         }
     }
 
-    
-    private void createTableIfnotExists() throws SQLException {
+    @Override
+    public void createTableIfnotExists() throws SQLException {
         YoungFifaChampions.LOG.addLog(this, Logger.LogType.DEBUG, "createTableIfnotExists()");
 
         Statement createTable = this.connection.createStatement();
@@ -72,4 +73,34 @@ public abstract class RepositoryBase<TEntity extends IHaveId> implements IReposi
             createTable.executeUpdate(createTableSql());
         }
     }
+
+    @Override
+    public TEntity get(Integer id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<TEntity> getAll() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void delete(Integer id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void update(TEntity entity) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void insert(TEntity entity) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
+
+    
+    
 }

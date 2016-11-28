@@ -5,6 +5,12 @@
  */
 package com.mycompany.youngfifachampions;
 
+import db.mappers.TeamRepositoryMapper;
+import db.repositories.TeamRepository;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
 /**
  *
  * @author Tmejs (mateusz.rzad@gmail.com)
@@ -20,8 +26,7 @@ public class YoungFifaChampions {
      * Input parameters object
      */
     public static Params PARAMS;
-    
-    
+
     public static Repositories REPOS;
 
     /**
@@ -43,16 +48,25 @@ public class YoungFifaChampions {
         //Initialize Logger
         LOG = new Logger(PARAMS.LOG_FILE_PATH, PARAMS.IS_FILE_APPEND, PARAMS.VERBOSE_MODE);
 
+        //Initialize DBConnection
+        Connection connection=null;
+        try {
+             connection=DriverManager.getConnection("");
+        } catch (SQLException exc) {
+            //Cant establish connection to DB
+            LOG.addLog(YoungFifaChampions.class, Logger.LogType.ERROR, exc);
+        }
+
         //InitializeRepositories
-//        REPO = new Repositories();
-        
-        
-        
+        REPOS = new Repositories();
+        //Add all repositories
+        REPOS.addRepository(new TeamRepository(connection, new TeamRepositoryMapper()));
+
     }
 
     public static void show() {
         YoungFifaChampions.LOG.addLog(YoungFifaChampions.class, Logger.LogType.DEBUG, "show()");
-        
+
         System.err.println(YoungFifaChampions.PARAMS.VERBOSE_MODE);
     }
 
