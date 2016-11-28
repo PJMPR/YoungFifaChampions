@@ -47,6 +47,20 @@ public class Params {
 
     private static final String COMMENT_CHAR = "#";
 
+    
+    class MyException extends Exception{
+
+        @Override
+        public String getMessage() {
+            return "To jest mój błąd";
+        }
+
+        
+        
+    }
+    
+    
+    
     //HashTable for not defined parameters
     public HashMap<String, Object> otherParams;
 
@@ -66,18 +80,19 @@ public class Params {
     //Do logs append file. If false then rewrite log
     public Boolean IS_FILE_APPEND=true;
     
-    public Params(String pathToConfigurationFile) throws Exception, IOException {
+    public Params(String pathToConfigurationFile) throws Exception, IOException,MyException {
 
-        //Set path to configurationFile
-        if(pathToConfigurationFile!=null){
-            CONF_FILE_PATH=pathToConfigurationFile;
-        }
-        
-        //Read and set AppParameters
-        readAndSetParams();
-
-        //check if setLogfile path
-        checkAndSetLogFile();
+        throw (new MyException());
+//        //Set path to configurationFile
+//        if(pathToConfigurationFile!=null){
+//            CONF_FILE_PATH=pathToConfigurationFile;
+//        }
+//        
+//        //Read and set AppParameters
+//        readAndSetParams();
+//
+//        //check if setLogfile path
+//        checkAndSetLogFile();
         
     }
 
