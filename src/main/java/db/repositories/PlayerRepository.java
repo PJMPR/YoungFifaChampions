@@ -5,6 +5,7 @@
  */
 package db.repositories;
 
+import db.actions.IUnitOfWork;
 import db.classes.Player;
 import db.mappers.IMapResultSetIntoEntity;
 import java.sql.Connection;
@@ -18,9 +19,11 @@ public class PlayerRepository extends RepositoryBase<Player>{
 
     private final static String TABLE_NAME="PLAYERS";
 
-    public PlayerRepository(Connection connection, IMapResultSetIntoEntity<Player> mapper) {
-        super(connection, mapper);
+    public PlayerRepository(Connection connection, IMapResultSetIntoEntity<Player> mapper, IUnitOfWork uow) {
+        super(connection, mapper, uow);
     }
+
+    
 
     @Override
     public String createTableSql() {
@@ -78,7 +81,6 @@ public class PlayerRepository extends RepositoryBase<Player>{
     public String tableName() {
         return TABLE_NAME;
     }
-    
     
     
 }

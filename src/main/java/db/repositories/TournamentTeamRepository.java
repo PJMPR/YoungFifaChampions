@@ -5,6 +5,7 @@
  */
 package db.repositories;
 
+import db.actions.IUnitOfWork;
 import db.classes.TournamentTeam;
 import db.mappers.IMapResultSetIntoEntity;
 import java.sql.Connection;
@@ -16,9 +17,11 @@ import java.sql.SQLException;
  */
 public class TournamentTeamRepository extends RepositoryBase<TournamentTeam> {
 
-    public TournamentTeamRepository(Connection connection, IMapResultSetIntoEntity<TournamentTeam> mapper) {
-        super(connection, mapper);
+    public TournamentTeamRepository(Connection connection, IMapResultSetIntoEntity<TournamentTeam> mapper, IUnitOfWork uow) {
+        super(connection, mapper, uow);
     }
+
+    
 
     private final static String TABLE_NAME = "TORUNAMENT_TEAMS";
 

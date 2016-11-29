@@ -5,6 +5,7 @@
  */
 package db.repositories;
 
+import db.actions.IUnitOfWork;
 import db.classes.TournamentResults;
 import db.mappers.IMapResultSetIntoEntity;
 import java.sql.Connection;
@@ -18,9 +19,11 @@ public class TournamentResultsRepository extends RepositoryBase<TournamentResult
 
     private final static String TABLE_NAME = "TOURNAMENTS";
 
-    public TournamentResultsRepository(Connection connection, IMapResultSetIntoEntity<TournamentResults> mapper) {
-        super(connection, mapper);
+    public TournamentResultsRepository(Connection connection, IMapResultSetIntoEntity<TournamentResults> mapper, IUnitOfWork uow) {
+        super(connection, mapper, uow);
     }
+
+    
 
     @Override
     public String createTableSql() {

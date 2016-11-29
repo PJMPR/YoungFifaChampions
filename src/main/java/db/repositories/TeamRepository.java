@@ -5,6 +5,7 @@
  */
 package db.repositories;
 
+import db.actions.IUnitOfWork;
 import db.classes.Team;
 import db.mappers.IMapResultSetIntoEntity;
 import java.sql.Connection;
@@ -18,10 +19,11 @@ public class TeamRepository extends RepositoryBase<Team> {
 
     private final static String TABLE_NAME = "TEAM";
 
-    public TeamRepository(Connection connection, IMapResultSetIntoEntity<Team> mapper) {
-        super(connection, mapper);
+    public TeamRepository(Connection connection, IMapResultSetIntoEntity<Team> mapper, IUnitOfWork uow) {
+        super(connection, mapper, uow);
     }
 
+    
     @Override
     public String createTableSql() {
         return "create table "

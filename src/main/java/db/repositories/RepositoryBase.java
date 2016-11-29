@@ -7,6 +7,9 @@ package db.repositories;
 
 import com.mycompany.youngfifachampions.Logger;
 import com.mycompany.youngfifachampions.YoungFifaChampions;
+import db.actions.Entity;
+import db.actions.IUnitOfWork;
+import db.actions.IUnitOfWorkRepository;
 import db.classes.IHaveId;
 import db.mappers.IMapResultSetIntoEntity;
 import java.sql.Connection;
@@ -14,13 +17,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
  * @author Tmejs (mateusz.rzad@gmail.com)
  */
-public abstract class RepositoryBase<TEntity extends IHaveId> implements IRepository<TEntity>, IRepositorySqlGetter, IRepositoryPrepareStatements<TEntity> {
+public abstract class RepositoryBase<TEntity extends IHaveId> implements IRepository<TEntity>, IRepositorySqlGetter, IRepositoryPrepareStatements<TEntity>, IUnitOfWorkRepository {
 
     protected Connection connection;
 
@@ -29,7 +33,7 @@ public abstract class RepositoryBase<TEntity extends IHaveId> implements IReposi
     protected PreparedStatement update;
     protected PreparedStatement delete;
     protected PreparedStatement selectAll;
-
+    protected IUnitOfWork uow;
     protected IMapResultSetIntoEntity<TEntity> mapper;
 
     public Connection getConnection() {
@@ -37,9 +41,10 @@ public abstract class RepositoryBase<TEntity extends IHaveId> implements IReposi
     }
 
     protected RepositoryBase(Connection connection,
-            IMapResultSetIntoEntity<TEntity> mapper) {
+            IMapResultSetIntoEntity<TEntity> mapper, IUnitOfWork uow) {
         YoungFifaChampions.LOG.addLog(this, Logger.LogType.DEBUG, "RepositoryBase()");
         this.connection = connection;
+        this.uow = uow;
         try {
             this.mapper = mapper;
             createTableIfnotExists();
@@ -75,28 +80,86 @@ public abstract class RepositoryBase<TEntity extends IHaveId> implements IReposi
     }
 
     @Override
-    public TEntity get(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public List<TEntity> getAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        YoungFifaChampions.LOG.addLog(this, Logger.LogType.DEBUG, "getAll()");
+        try {
+            ResultSet rs = selectAll.executeQuery();
+            List<TEntity> result = new ArrayList<TEntity>();
+            while (rs.next()) {
+                result.add(mapper.map(rs));
+            }
+            return result;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
     }
 
     @Override
-    public void delete(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public TEntity get(TEntity entity) throws SQLException {
+        getPrepare(entity);
+        return mapper.map(selectById.executeQuery());
+
+    }
+
+    public void add(TEntity entity) {
+        Entity ent = new Entity(this);
+        ent.setEntity(entity);
+        uow.markAsNew(ent);
+
+    }
+
+    @Override
+    public void delete(TEntity entity) {
+        Entity ent = new Entity(this);
+        ent.setEntity(entity);
+        uow.markAsDeleted(ent);
     }
 
     @Override
     public void update(TEntity entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Entity ent = new Entity(this);
+        ent.setEntity(entity);
+        uow.markAsChanged(ent);
     }
 
     @Override
-    public void insert(TEntity entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void persistUpdate(Entity entity) {
+        try {
+            updatePrepare((TEntity) entity.getEntity());
+            update.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void persistAdd(Entity entity) {
+        try {
+            insertPrepare((TEntity) entity.getEntity());
+            insert.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void persistDelete(Entity entity) {
+        try {
+            deletePrepare((TEntity) entity.getEntity());
+            delete.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void insert(TEntity entity) throws SQLException {
+        YoungFifaChampions.LOG.addLog(this, Logger.LogType.DEBUG, "insert()");
+
+        insertPrepare(entity);
+
+        insert.execute();
     }
 
     @Override
@@ -113,11 +176,14 @@ public abstract class RepositoryBase<TEntity extends IHaveId> implements IReposi
 
     @Override
     public void deletePrepare(TEntity entity) throws SQLException {
+        YoungFifaChampions.LOG.addLog(this, Logger.LogType.DEBUG, "deletePrepare()");
+
         delete.setInt(1, entity.getId());
     }
 
     @Override
     public void getPrepare(TEntity entity) throws SQLException {
+        YoungFifaChampions.LOG.addLog(this, Logger.LogType.DEBUG, "getPrepare()");
         selectById.setInt(1, entity.getId());
     }
 

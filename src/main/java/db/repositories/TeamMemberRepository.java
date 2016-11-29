@@ -5,6 +5,7 @@
  */
 package db.repositories;
 
+import db.actions.IUnitOfWork;
 import db.classes.TeamMember;
 import db.mappers.IMapResultSetIntoEntity;
 import java.sql.Connection;
@@ -19,9 +20,11 @@ public class TeamMemberRepository  extends RepositoryBase<TeamMember>{
     
     private final static String TABLE_NAME = "TEAM_PLAYERS";
 
-    public TeamMemberRepository(Connection connection, IMapResultSetIntoEntity<TeamMember> mapper) {
-        super(connection, mapper);
+    public TeamMemberRepository(Connection connection, IMapResultSetIntoEntity<TeamMember> mapper, IUnitOfWork uow) {
+        super(connection, mapper, uow);
     }
+
+  
 
     
 

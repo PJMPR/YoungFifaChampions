@@ -5,6 +5,7 @@
  */
 package db.repositories;
 
+import db.actions.IUnitOfWork;
 import db.classes.Ground;
 import db.mappers.IMapResultSetIntoEntity;
 import java.sql.Connection;
@@ -18,10 +19,12 @@ public class GroundRepository extends RepositoryBase<Ground> {
 
     private final static String TABLE_NAME = "GROUNDS";
 
-    public GroundRepository(Connection connection, IMapResultSetIntoEntity<Ground> mapper) {
-        super(connection, mapper);
+    public GroundRepository(Connection connection, IMapResultSetIntoEntity<Ground> mapper, IUnitOfWork uow) {
+        super(connection, mapper, uow);
     }
 
+
+    
     @Override
     public String createTableSql() {
         return "create table "

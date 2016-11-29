@@ -15,15 +15,15 @@ import java.util.List;
  */
 public interface IRepository<TEntity extends IHaveId> {
 
-    public TEntity get(Integer id);
+    public TEntity get(TEntity entity) throws SQLException;
 
     public List<TEntity> getAll();
 
-    public void delete(Integer id);
+    public void delete(TEntity entity) throws SQLException;
 
-    public void update(TEntity entity);
+    public void update(TEntity entity)throws SQLException;
 
-    public void insert(TEntity entity);
+    public void insert(TEntity entity)throws SQLException;
 
     public void createTableIfnotExists() throws SQLException;
 

@@ -60,7 +60,12 @@ public class YoungFifaChampions {
         //InitializeRepositories
         REPOS = new Repositories();
         //Add all repositories
-        REPOS.addRepository(new TeamRepository(connection, new TeamRepositoryMapper()));
+//        try{
+//        REPOS.addRepository(new TeamRepository(connection, n, uow));
+        
+//        }catch(SQLException e){
+//            
+//        }
 
     }
 
