@@ -56,7 +56,8 @@ public class TeamRepository extends RepositoryBase<Team> {
         return "UPDATE "
                 + tableName()
                 + " set (NAME,DESCRIPTION,GROUND_ID)="
-                + "(?,?,?)";
+                + "(?,?,?)"
+                + "where id = ?";
     }
 
     @Override
@@ -64,6 +65,7 @@ public class TeamRepository extends RepositoryBase<Team> {
         update.setString(1, entity.getName());
         update.setString(2, entity.getDescription());
         update.setInt(3, entity.getHomeGroundId());
+        update.setInt(4, entity.getId());
 
     }
 

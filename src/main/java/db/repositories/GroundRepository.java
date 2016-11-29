@@ -51,12 +51,14 @@ public class GroundRepository extends RepositoryBase<Ground> {
         return "UPDATE "
                 + tableName()
                 + " set (ADDRESS)="
-                + "(?)";
+                + "(?) "
+                + "where id = ?";
     }
 
     @Override
     public void updatePrepare(Ground entity) throws SQLException {
         update.setString(1, entity.getAddress());
+        update.setInt(2, entity.getId());
     }
 
     @Override

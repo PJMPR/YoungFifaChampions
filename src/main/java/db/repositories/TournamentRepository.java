@@ -14,14 +14,14 @@ import java.sql.SQLException;
  *
  * @author Tmejs (mateusz.rzad@gmail.com)
  */
-public class TournamentRepository extends RepositoryBase<Tournament>{
-    
+public class TournamentRepository extends RepositoryBase<Tournament> {
+
     private final static String TABLE_NAME = "TOURNAMENTS";
 
     public TournamentRepository(Connection connection, IMapResultSetIntoEntity<Tournament> mapper) {
         super(connection, mapper);
     }
-    
+
     @Override
     public String createTableSql() {
         return "create table "
@@ -59,7 +59,8 @@ public class TournamentRepository extends RepositoryBase<Tournament>{
         return "UPDATE "
                 + tableName()
                 + " set (TOURNAMENT_DATE,DESCRIPTION,GROUND_ID,ORGANIZER_ID)="
-                + "(?,?,?,?)";
+                + "(?,?,?,?)"
+                + "where id = ?";
     }
 
     @Override
@@ -68,6 +69,7 @@ public class TournamentRepository extends RepositoryBase<Tournament>{
         update.setString(2, entity.getDescription());
         update.setInt(3, entity.getGroundId());
         update.setInt(4, entity.getOrganizerPersonId());
+        update.setInt(5, entity.getId());
     }
 
     @Override

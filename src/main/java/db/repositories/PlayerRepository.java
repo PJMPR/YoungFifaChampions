@@ -60,7 +60,8 @@ public class PlayerRepository extends RepositoryBase<Player>{
         return "UPDATE "
                 + tableName()
                 + " set (NAME,SURNAME,CONTACT_NUMBER,USER_ID)="
-                + "(?,?,?,?)";
+                + "(?,?,?,?)"
+                + "where id = ?";
     }
 
     @Override
@@ -69,6 +70,7 @@ public class PlayerRepository extends RepositoryBase<Player>{
         insert.setString(2, entity.getSurname());
         insert.setString(3,entity.getContactNumber());
         insert.setInt(4, entity.getUserId());
+        update.setInt(5, entity.getId());
     }
     
     

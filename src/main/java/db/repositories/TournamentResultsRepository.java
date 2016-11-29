@@ -61,7 +61,9 @@ public class TournamentResultsRepository extends RepositoryBase<TournamentResult
         return "UPDATE "
                 + tableName()
                 + " set (TOURNAMENT_ID,ID_TEAM_1_PLACE,ID_TEAM_2_PLACE,ID_TEAM_3_PLACE)="
-                + "(?,?,?,?)";
+                + "(?,?,?,?)"
+                + "where id = ?";
+        
     }
 
     @Override
@@ -70,6 +72,7 @@ public class TournamentResultsRepository extends RepositoryBase<TournamentResult
         update.setInt(2, entity.getFirstPlaceTeamId());
         update.setInt(3, entity.getSecondPlaceTeamId());
         update.setInt(4, entity.getThirdPlaceTeamId());
+        update.setInt(5, entity.getId());
     }
 
     @Override
