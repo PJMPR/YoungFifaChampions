@@ -13,29 +13,43 @@ public class Player implements IHaveId{
     
     private final Integer id;
     
-    private final String imie;
+    private final String name;
     
-    private final String nazwisko;
+    private final String surname;
     
     private final String contactNumber;
     
     private final Integer userId;
 
-    public Player(Integer id, String imie, String nazwisko, String contactNumber, Integer userId) {
+    public Player(Integer id, String name, String surname, String contactNumber, Integer userId) {
         this.id = id;
-        this.imie = imie;
-        this.nazwisko = nazwisko;
+        this.name = name;
+        this.surname = surname;
         this.contactNumber = contactNumber;
         this.userId = userId;
     }
+
 
     @Override
     public Integer getId() {
        return id;
     }
-    
-    
-    
+
+    public String getName() {
+        return name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public String getContactNumber() {
+        return contactNumber;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
     
     
     

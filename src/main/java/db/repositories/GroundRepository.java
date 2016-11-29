@@ -60,16 +60,6 @@ public class GroundRepository extends RepositoryBase<Ground> {
     }
 
     @Override
-    public void deletePrepare(Ground entity) throws SQLException {
-        delete.setInt(1, entity.getId());
-    }
-
-    @Override
-    public void getPrepare(Ground entity) throws SQLException {
-        selectById.setInt(1, entity.getId());
-    }
-
-    @Override
     public String tableName() {
         return TABLE_NAME;
     }

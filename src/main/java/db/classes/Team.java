@@ -9,16 +9,15 @@ package db.classes;
  *
  * @author Tmejs (mateusz.rzad@gmail.com)
  */
-public class Team implements IHaveId{
+public class Team implements IHaveId {
 
-    
     //Class params
     private final Integer id;
-    
+
     private final String name;
-    
+
     private final String description;
-    
+
     private final Integer homeGroundId;
 
     public Team(Integer id, String name, String description, Integer homeGroundId) {
@@ -28,9 +27,6 @@ public class Team implements IHaveId{
         this.homeGroundId = homeGroundId;
     }
 
-    
-    
-    
     @Override
     public Integer getId() {
         return id;
@@ -47,8 +43,5 @@ public class Team implements IHaveId{
     public Integer getHomeGroundId() {
         return homeGroundId;
     }
-    
-    
-    
-    
+
 }

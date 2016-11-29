@@ -20,7 +20,7 @@ import java.util.List;
  *
  * @author Tmejs (mateusz.rzad@gmail.com)
  */
-public abstract class RepositoryBase<TEntity extends IHaveId> implements IRepository<TEntity>, IRepositorySqlGetter,IRepositoryPrepareStatements<TEntity> {
+public abstract class RepositoryBase<TEntity extends IHaveId> implements IRepository<TEntity>, IRepositorySqlGetter, IRepositoryPrepareStatements<TEntity> {
 
     protected Connection connection;
 
@@ -101,7 +101,7 @@ public abstract class RepositoryBase<TEntity extends IHaveId> implements IReposi
 
     @Override
     public String getAllSql() {
-        return "SELECT * FROM "+ tableName();
+        return "SELECT * FROM " + tableName();
     }
 
     @Override
@@ -112,17 +112,20 @@ public abstract class RepositoryBase<TEntity extends IHaveId> implements IReposi
     }
 
     @Override
+    public void deletePrepare(TEntity entity) throws SQLException {
+        delete.setInt(1, entity.getId());
+    }
+
+    @Override
+    public void getPrepare(TEntity entity) throws SQLException {
+        selectById.setInt(1, entity.getId());
+    }
+
+    @Override
     public String getSql() {
         return " select * from "
                 + tableName()
-                +" where id = ?";
+                + " where id = ?";
     }
-    
-    
-    
-    
-    
 
-    
-    
 }
