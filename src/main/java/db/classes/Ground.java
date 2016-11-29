@@ -9,10 +9,10 @@ package db.classes;
  *
  * @author Tmejs (mateusz.rzad@gmail.com)
  */
-public class Ground implements IHaveId{
-    
+public class Ground implements IHaveId {
+
     private final Integer id;
-    
+
     private final String address;
 
     public Ground(Integer id, String address) {
@@ -24,7 +24,9 @@ public class Ground implements IHaveId{
     public Integer getId() {
         return id;
     }
-    
-    
-    
+
+    public String getAddress() {
+        return address;
+    }
+
 }

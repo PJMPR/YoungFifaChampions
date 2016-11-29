@@ -14,15 +14,13 @@ import java.sql.SQLException;
  */
 public interface IRepositoryPrepareStatements<TEntity extends IHaveId> {
 
-    public void insertPrepare(TEntity entity);
+    public void insertPrepare(TEntity entity) throws SQLException;
 
-    public void updatePrepare(TEntity entity);
+    public void updatePrepare(TEntity entity)  throws SQLException;
 
-    public void getAllPrepare();
+    public void deletePrepare(TEntity entity)  throws SQLException;
 
-    public void deletePrepare(TEntity entity);
-
-    public void getPrepare(TEntity entity);
+    public void getPrepare(TEntity entity)  throws SQLException;
 
 
 }

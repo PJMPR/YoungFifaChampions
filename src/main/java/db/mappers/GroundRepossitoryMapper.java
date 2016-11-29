@@ -7,7 +7,7 @@ package db.mappers;
 
 import com.mycompany.youngfifachampions.Logger;
 import com.mycompany.youngfifachampions.YoungFifaChampions;
-import db.classes.Team;
+import db.classes.Ground;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -15,23 +15,19 @@ import java.sql.SQLException;
  *
  * @author Tmejs (mateusz.rzad@gmail.com)
  */
-public class TeamRepositoryMapper implements IMapResultSetIntoEntity<Team> {
+public class GroundRepossitoryMapper implements IMapResultSetIntoEntity<Ground> {
 
     @Override
-    public Team map(ResultSet rs) {
+    public Ground map(ResultSet rs) {
         YoungFifaChampions.LOG.addLog(this, Logger.LogType.DEBUG, "map");
 
         Integer id;
-        String name;
-        String description;
-        Integer groundId;
+        String address;
 
         try {
 
             id = rs.getInt("ID");
-            name = rs.getString("NAME");
-            description = rs.getString("DESCRIPTION");
-            groundId = rs.getInt("GROUND_ID");
+            address = rs.getString("ADDRESS");
 
         } catch (SQLException e) {
             YoungFifaChampions.LOG.addLog(this, Logger.LogType.ERROR, "map");
@@ -39,8 +35,7 @@ public class TeamRepositoryMapper implements IMapResultSetIntoEntity<Team> {
             return null;
         }
 
-        return new Team(id, name, description, groundId);
-
+        return new Ground(id, address);
     }
 
 }

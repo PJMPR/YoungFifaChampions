@@ -15,18 +15,19 @@ public class Team implements IHaveId{
     //Class params
     private final Integer id;
     
-    private final String nazwa;
+    private final String name;
     
-    private final String opis;
+    private final String description;
     
-    private final Integer idDomowegoBoiska;
+    private final Integer homeGroundId;
 
-    public Team(Integer id, String nazwa, String opis, Integer idDomowegoBoiska) {
+    public Team(Integer id, String name, String description, Integer homeGroundId) {
         this.id = id;
-        this.nazwa = nazwa;
-        this.opis = opis;
-        this.idDomowegoBoiska = idDomowegoBoiska;
+        this.name = name;
+        this.description = description;
+        this.homeGroundId = homeGroundId;
     }
+
     
     
     
@@ -34,6 +35,19 @@ public class Team implements IHaveId{
     public Integer getId() {
         return id;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public Integer getHomeGroundId() {
+        return homeGroundId;
+    }
+    
     
     
     

@@ -98,6 +98,28 @@ public abstract class RepositoryBase<TEntity extends IHaveId> implements IReposi
     public void insert(TEntity entity) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public String getAllSql() {
+        return "SELECT * FROM "+ tableName();
+    }
+
+    @Override
+    public String deleteSql() {
+        return "DELETE FROM "
+                + tableName()
+                + "where id = ?";
+    }
+
+    @Override
+    public String getSql() {
+        return " select * from "
+                + tableName()
+                +" where id = ?";
+    }
+    
+    
+    
     
     
 
