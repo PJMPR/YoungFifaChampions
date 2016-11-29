@@ -9,8 +9,8 @@ package db.classes;
  *
  * @author Tmejs (mateusz.rzad@gmail.com)
  */
-public class TournamentResults implements IHaveId{
-    
+public class TournamentResults implements IHaveId {
+
     private final Integer id;
     private final Integer tournamentId;
     private final Integer firstPlaceTeamId;
@@ -29,8 +29,21 @@ public class TournamentResults implements IHaveId{
         this.secondPlaceTeamId = secondPlaceTeamId;
         this.thirdPlaceTeamId = thirdPlaceTeamId;
     }
-    
-    
-    
-    
+
+    public Integer getTournamentId() {
+        return tournamentId;
+    }
+
+    public Integer getFirstPlaceTeamId() {
+        return firstPlaceTeamId;
+    }
+
+    public Integer getSecondPlaceTeamId() {
+        return secondPlaceTeamId;
+    }
+
+    public Integer getThirdPlaceTeamId() {
+        return thirdPlaceTeamId;
+    }
+
 }

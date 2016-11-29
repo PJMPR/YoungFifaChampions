@@ -26,6 +26,22 @@ public class Tournament implements IHaveId{
         this.organizerPersonId = organizerPersonId;
         this.groundId = groundId;
     }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public Integer getOrganizerPersonId() {
+        return organizerPersonId;
+    }
+
+    public Integer getGroundId() {
+        return groundId;
+    }
     
     
     
