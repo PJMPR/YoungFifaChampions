@@ -56,7 +56,6 @@ public class Logger {
 
         //Set verbose mode
         this.verboseMode = verboseMode;
-
     }
 
     /**

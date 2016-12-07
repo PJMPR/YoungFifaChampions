@@ -7,7 +7,6 @@ package db.mappers;
 
 import com.mycompany.youngfifachampions.Logger;
 import com.mycompany.youngfifachampions.YoungFifaChampions;
-import db.classes.Team;
 import db.classes.Tournament;
 import java.sql.Date;
 import java.sql.ResultSet;
@@ -18,6 +17,11 @@ import java.sql.SQLException;
  * @author Tmejs (mateusz.rzad@gmail.com)
  */
 public class TournamentRepositoryMapper implements IMapResultSetIntoEntity<Tournament> {
+
+    enum typ {
+        typ1,
+        typ2
+    }
 
     @Override
     public Tournament map(ResultSet rs) {

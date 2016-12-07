@@ -53,6 +53,7 @@ public abstract class RepositoryBase<TEntity extends IHaveId> implements IReposi
             update = connection.prepareStatement(updateSql());
             delete = connection.prepareStatement(deleteSql());
             selectAll = connection.prepareStatement(getAllSql());
+            connection.commit();
         } catch (SQLException ex) {
             YoungFifaChampions.LOG.addLog(this, Logger.LogType.ERROR, ex);
         }
@@ -171,7 +172,7 @@ public abstract class RepositoryBase<TEntity extends IHaveId> implements IReposi
     public String deleteSql() {
         return "DELETE FROM "
                 + tableName()
-                + "where id = ?";
+                + " where id = ?";
     }
 
     @Override

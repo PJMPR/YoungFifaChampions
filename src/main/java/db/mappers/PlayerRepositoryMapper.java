@@ -34,7 +34,6 @@ public class PlayerRepositoryMapper implements IMapResultSetIntoEntity<Player> {
             surname = rs.getString("SURNAME");
             phoneNumber = rs.getString("PHONE_NUMBER");
             userId = rs.getInt("USER_ID");
-
         } catch (SQLException e) {
             YoungFifaChampions.LOG.addLog(this, Logger.LogType.ERROR, "map");
             //never returns null cause log stops app
@@ -42,6 +41,7 @@ public class PlayerRepositoryMapper implements IMapResultSetIntoEntity<Player> {
         }
 
         return new Player(id, name, surname, phoneNumber, userId);
+
     }
 
 }

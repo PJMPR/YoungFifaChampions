@@ -34,7 +34,9 @@ public class TeamMemberMapper implements IMapResultSetIntoEntity<TeamMember>{
             isCaptain = rs.getBoolean("IS_CAPTAIN");
 
         } catch (SQLException e) {
-            YoungFifaChampions.LOG.addLog(this, Logger.LogType.ERROR, "map");
+            YoungFifaChampions.LOG.addLog(this, Logger.LogType.DEBUG, "map");
+            YoungFifaChampions.LOG.addLog(this, Logger.LogType.ERROR, e);
+            
             //never returns null cause log stops app
             return null;
         }

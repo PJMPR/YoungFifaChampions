@@ -82,17 +82,17 @@ public class Params {
     
     public Params(String pathToConfigurationFile) throws Exception, IOException,MyException {
 
-        throw (new MyException());
-//        //Set path to configurationFile
-//        if(pathToConfigurationFile!=null){
-//            CONF_FILE_PATH=pathToConfigurationFile;
-//        }
-//        
-//        //Read and set AppParameters
-//        readAndSetParams();
-//
-//        //check if setLogfile path
-//        checkAndSetLogFile();
+//        throw (new MyException());
+        //Set path to configurationFile
+        if(pathToConfigurationFile!=null){
+            CONF_FILE_PATH=pathToConfigurationFile;
+        }
+        
+        //Read and set AppParameters
+        readAndSetParams();
+
+        //check if setLogfile path
+        checkAndSetLogFile();
         
     }
 

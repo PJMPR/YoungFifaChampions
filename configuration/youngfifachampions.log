@@ -1,2 +1,14 @@
-2016/11/19 13:13:46	DEBUG	Main	Stworzony logger
-2016/11/19 13:13:46	WARRNING	class com.mycompany.youngfifachampions.YoungFifaChampions	Test error
+2016/12/07 14:05:34	DEBUG	db.repositories.GroundRepository@65b3120a	RepositoryBase()
+2016/12/07 14:05:34	DEBUG	db.repositories.GroundRepository@65b3120a	createTableIfnotExists()
+2016/12/07 14:05:34	DEBUG	db.repositories.PlayerRepository@4d405ef7	RepositoryBase()
+2016/12/07 14:05:34	DEBUG	db.repositories.PlayerRepository@4d405ef7	createTableIfnotExists()
+2016/12/07 14:05:34	DEBUG	db.repositories.TeamRepository@6193b845	RepositoryBase()
+2016/12/07 14:05:34	DEBUG	db.repositories.TeamRepository@6193b845	createTableIfnotExists()
+2016/12/07 14:05:34	DEBUG	db.repositories.TeamMemberRepository@2e817b38	RepositoryBase()
+2016/12/07 14:05:34	DEBUG	db.repositories.TeamMemberRepository@2e817b38	createTableIfnotExists()
+2016/12/07 14:05:34	DEBUG	db.repositories.TournamentRepository@c4437c4	RepositoryBase()
+2016/12/07 14:05:34	DEBUG	db.repositories.TournamentRepository@c4437c4	createTableIfnotExists()
+2016/12/07 14:05:34	DEBUG	db.repositories.TournamentTeamRepository@433c675d	RepositoryBase()
+2016/12/07 14:05:34	DEBUG	db.repositories.TournamentTeamRepository@433c675d	createTableIfnotExists()
+2016/12/07 14:05:34	DEBUG	db.repositories.TournamentRepository@3f91beef	RepositoryBase()
+2016/12/07 14:05:34	DEBUG	db.repositories.TournamentRepository@3f91beef	createTableIfnotExists()

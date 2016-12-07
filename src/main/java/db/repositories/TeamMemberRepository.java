@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -15,18 +16,13 @@ import java.sql.SQLException;
  *
  * @author Tmejs (mateusz.rzad@gmail.com)
  */
-public class TeamMemberRepository  extends RepositoryBase<TeamMember>{
-    
-    
+public class TeamMemberRepository extends RepositoryBase<TeamMember> {
+
     private final static String TABLE_NAME = "TEAM_PLAYERS";
 
     public TeamMemberRepository(Connection connection, IMapResultSetIntoEntity<TeamMember> mapper, IUnitOfWork uow) {
         super(connection, mapper, uow);
     }
-
-  
-
-    
 
     @Override
     public String createTableSql() {
@@ -39,7 +35,6 @@ public class TeamMemberRepository  extends RepositoryBase<TeamMember>{
                 + "IS_CAPTAIN BOOLEAN,"
                 + "FOREIGN KEY (TEAM_ID) REFERENCES TEAMS(ID),"
                 + "FOREIGN KEY (PLAYER_ID) REFERENCES PLAYERS(ID))";
-
     }
 
     @Override
@@ -69,15 +64,15 @@ public class TeamMemberRepository  extends RepositoryBase<TeamMember>{
 
     @Override
     public void updatePrepare(TeamMember entity) throws SQLException {
-        insert.setInt(1, entity.getTeamId());
-        insert.setInt(2, entity.getPlayerId());
-        insert.setBoolean(3, entity.getIsCaptain());
-        insert.setInt(4, entity.getId());
+        update.setInt(1, entity.getTeamId());
+        update.setInt(2, entity.getPlayerId());
+        update.setBoolean(3, entity.getIsCaptain());
+        update.setInt(4, entity.getId());
     }
 
     @Override
     public String tableName() {
         return TABLE_NAME;
     }
-    
+
 }
