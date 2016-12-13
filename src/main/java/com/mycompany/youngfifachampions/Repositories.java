@@ -5,9 +5,25 @@
  */
 package com.mycompany.youngfifachampions;
 
-import db.repositories.RepositoryBase;
-import java.util.ArrayList;
-import java.util.List;
+import db.actions.IUnitOfWork;
+import db.actions.UnitOfWork;
+import db.mappers.GroundRepossitoryMapper;
+import db.mappers.PlayerRepositoryMapper;
+import db.mappers.TeamMemberMapper;
+import db.mappers.TeamRepositoryMapper;
+import db.mappers.TournamentRepositoryMapper;
+import db.mappers.TournamentResultsMapper;
+import db.mappers.TournamentTeamMapper;
+import db.repositories.GroundRepository;
+import db.repositories.PlayerRepository;
+import db.repositories.TeamMemberRepository;
+import db.repositories.TeamRepository;
+import db.repositories.TournamentRepository;
+import db.repositories.TournamentResultsRepository;
+import db.repositories.TournamentTeamRepository;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 /**
  *
@@ -15,35 +31,91 @@ import java.util.List;
  */
 public class Repositories {
 
-    //ListOfRepositories
-    private final List<RepositoryBase> repositoryList;
-    
-    public Repositories() {
-        repositoryList = new ArrayList<>();
+    private final static String CONNECTION_STRING = "jdbc:hsqldb:hsql://localhost/workdb";
+
+    private IUnitOfWork uow;
+    private Connection connection;
+
+    //Repositories
+    private GroundRepository gr;
+    private PlayerRepository plr;
+    private TeamMemberRepository tmr;
+    private TeamRepository tr;
+    private TournamentRepository tour;
+    private TournamentResultsRepository trr;
+    private TournamentTeamRepository tteamr;
+
+    private Connection getNewConnection() throws SQLException {
+
+        return DriverManager.getConnection(CONNECTION_STRING);
     }
-    
-    
-    public void addRepository(RepositoryBase repo){
-        repositoryList.add(repo);
+
+    private IUnitOfWork getNewUow() {
+        return new UnitOfWork(connection);
     }
-    
-    public void addRepository(RepositoryBase... repos){
-        for(RepositoryBase repo:repos){
-            repositoryList.add(repo);
+
+    public void setUow(IUnitOfWork uow) {
+        this.uow = uow;
+    }
+
+    public void setConnection(Connection connection) {
+        this.connection = connection;
+    }
+
+    public Repositories() throws SQLException {
+
+        setConnection(getNewConnection());
+        setUow(getNewUow());
+
+    }
+
+    public GroundRepository getGroundRepository() {
+        if (gr == null) {
+            gr = new GroundRepository(connection, new GroundRepossitoryMapper(), uow);
         }
+        return gr;
     }
-    
-    public RepositoryBase getRepositoryByClass(Class repositoryClass){
-        for(RepositoryBase repo:repositoryList){
-            if(repo.getClass()==repositoryClass){
-                //found repository
-                return repo;
-            }
+
+    public PlayerRepository getPlayerRepository() {
+        if (plr == null) {
+            plr = new PlayerRepository(connection, new PlayerRepositoryMapper(), uow);
         }
-        
-        //No repository added
-        return null;
+        return plr;
     }
-    
+
+    public TeamMemberRepository getMemberRepository() {
+        if (tmr == null) {
+            tmr = new TeamMemberRepository(connection, new TeamMemberMapper(), uow);
+        }
+        return tmr;
+    }
+
+    public TeamRepository getTeamRepository() {
+        if (tr == null) {
+            tr = new TeamRepository(connection, new TeamRepositoryMapper(), uow);
+        }
+        return tr;
+    }
+
+    public TournamentRepository getTournamentRepository() {
+        if (tour == null) {
+            tour = new TournamentRepository(connection, new TournamentRepositoryMapper(), uow);
+        }
+        return tour;
+    }
+
+    public TournamentResultsRepository getTournamentResultsRepository() {
+        if (trr == null) {
+            trr = new TournamentResultsRepository(connection, new TournamentResultsMapper(), uow);
+        }
+        return trr;
+    }
+
+    public TournamentTeamRepository getTournamentTeamRepository() {
+        if (tteamr == null) {
+            tteamr = new TournamentTeamRepository(connection, new TournamentTeamMapper(), uow);
+        }
+        return tteamr;
+    }
 
 }
