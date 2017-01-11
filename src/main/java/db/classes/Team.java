@@ -15,16 +15,14 @@ public class Team implements IHaveId {
     private final Integer id;
 
     private final String name;
+    
+    private final Integer idUsera;
 
-    private final String description;
 
-    private final Integer homeGroundId;
-
-    public Team(Integer id, String name, String description, Integer homeGroundId) {
+    public Team(Integer id, String name,Integer idUsera) {
         this.id = id;
         this.name = name;
-        this.description = description;
-        this.homeGroundId = homeGroundId;
+        this.idUsera=idUsera;
     }
 
     @Override
@@ -36,12 +34,10 @@ public class Team implements IHaveId {
         return name;
     }
 
-    public String getDescription() {
-        return description;
+    public Integer getIdUsera() {
+        return idUsera;
     }
 
-    public Integer getHomeGroundId() {
-        return homeGroundId;
-    }
+    
 
 }

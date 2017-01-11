@@ -17,7 +17,7 @@ import java.sql.SQLException;
  */
 public class TournamentResultsRepository extends RepositoryBase<TournamentResults> {
 
-    private final static String TABLE_NAME = "TOURNAMENTS";
+    private final static String TABLE_NAME = "TOURNAMENTS_RES";
 
     public TournamentResultsRepository(Connection connection, IMapResultSetIntoEntity<TournamentResults> mapper, IUnitOfWork uow) {
         super(connection, mapper, uow);
@@ -35,7 +35,7 @@ public class TournamentResultsRepository extends RepositoryBase<TournamentResult
                 + "ID_TEAM_1_PLACE INT,"
                 + "ID_TEAM_2_PLACE INT,"
                 + "ID_TEAM_3_PLACE INT,"
-                + "FOREIGN KEY (TOURNAMENT_ID) REFERENCES TOURNAMETS(ID),"
+                + "FOREIGN KEY (TOURNAMENT_ID) REFERENCES TOURNAMENTS(ID),"
                 + "FOREIGN KEY (ID_TEAM_1_PLACE) REFERENCES TEAMS(ID),"
                 + "FOREIGN KEY (ID_TEAM_2_PLACE) REFERENCES TEAMS(ID),"
                 + "FOREIGN KEY (ID_TEAM_3_PLACE) REFERENCES TEAMS(ID))";

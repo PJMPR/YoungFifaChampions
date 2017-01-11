@@ -80,6 +80,9 @@ public class Params {
     //Do logs append file. If false then rewrite log
     public Boolean IS_FILE_APPEND=true;
     
+    
+    public String CONNECTION_STRING;
+    
     public Params(String pathToConfigurationFile) throws Exception, IOException,MyException {
 
 //        throw (new MyException());
@@ -152,7 +155,11 @@ public class Params {
      * @param line line from configFile
      */
     private void decodeConfigLine(String line) {
-
+        
+        //Check is line only Enter
+        if (line.isEmpty()) return;
+        
+        
         //Patameter values
         String parameterName = null;
         String parameterValue = null;
@@ -161,7 +168,8 @@ public class Params {
         //choping line to get name,value and type
         //name
         parameterName = line.split(PARAMETER_VALUE_DELIMETER)[0];
-
+        System.err.println(parameterName);
+        System.err.println(line);
         //Check if type is defined
         if (line.split(PARAMETER_VALUE_DELIMETER)[1].contains(PARAMETER_TYPE_DELIMETER)) {
             //has defined type so split to get it

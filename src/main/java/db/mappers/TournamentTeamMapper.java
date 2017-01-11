@@ -20,7 +20,7 @@ public class TournamentTeamMapper implements IMapResultSetIntoEntity<TournamentT
 
     @Override
     public TournamentTeam map(ResultSet rs) {
-        YoungFifaChampions.LOG.addLog(this, Logger.LogType.DEBUG, "map");
+//        YoungFifaChampions.LOG.addLog(this, Logger.LogType.DEBUG, "map");
 
         Integer id;
         Integer tournamentID;
@@ -33,7 +33,7 @@ public class TournamentTeamMapper implements IMapResultSetIntoEntity<TournamentT
             teamId = rs.getInt("TEAM_ID");
 
         } catch (SQLException e) {
-            YoungFifaChampions.LOG.addLog(this, Logger.LogType.ERROR, "map");
+//            YoungFifaChampions.LOG.addLog(this, Logger.LogType.ERROR, "map");
             //never returns null cause log stops app
             return null;
         }

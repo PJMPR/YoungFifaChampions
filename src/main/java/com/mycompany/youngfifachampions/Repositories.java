@@ -7,20 +7,16 @@ package com.mycompany.youngfifachampions;
 
 import db.actions.IUnitOfWork;
 import db.actions.UnitOfWork;
-import db.mappers.GroundRepossitoryMapper;
-import db.mappers.PlayerRepositoryMapper;
-import db.mappers.TeamMemberMapper;
 import db.mappers.TeamRepositoryMapper;
 import db.mappers.TournamentRepositoryMapper;
 import db.mappers.TournamentResultsMapper;
 import db.mappers.TournamentTeamMapper;
-import db.repositories.GroundRepository;
-import db.repositories.PlayerRepository;
-import db.repositories.TeamMemberRepository;
+import db.mappers.UserRepositoryMapper;
 import db.repositories.TeamRepository;
 import db.repositories.TournamentRepository;
 import db.repositories.TournamentResultsRepository;
 import db.repositories.TournamentTeamRepository;
+import db.repositories.UserRepository;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -32,21 +28,19 @@ import java.sql.SQLException;
 public class Repositories {
 
     private final static String CONNECTION_STRING = "jdbc:hsqldb:hsql://localhost/workdb";
-
     private IUnitOfWork uow;
     private Connection connection;
 
     //Repositories
-    private GroundRepository gr;
-    private PlayerRepository plr;
-    private TeamMemberRepository tmr;
     private TeamRepository tr;
     private TournamentRepository tour;
     private TournamentResultsRepository trr;
     private TournamentTeamRepository tteamr;
+    private UserRepository ur;
 
-    private Connection getNewConnection() throws SQLException {
+    private Connection getNewConnection() throws SQLException,ClassNotFoundException{
 
+        Class.forName("org.hsqldb.jdbcDriver");
         return DriverManager.getConnection(CONNECTION_STRING);
     }
 
@@ -62,32 +56,28 @@ public class Repositories {
         this.connection = connection;
     }
 
-    public Repositories() throws SQLException {
+    public Repositories() throws SQLException,ClassNotFoundException{
 
         setConnection(getNewConnection());
         setUow(getNewUow());
 
     }
 
-    public GroundRepository getGroundRepository() {
-        if (gr == null) {
-            gr = new GroundRepository(connection, new GroundRepossitoryMapper(), uow);
-        }
-        return gr;
+    public void saveAndQuit() {
+        uow.saveChanges();
+//        try {
+//            connection.close();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+
     }
 
-    public PlayerRepository getPlayerRepository() {
-        if (plr == null) {
-            plr = new PlayerRepository(connection, new PlayerRepositoryMapper(), uow);
+    public UserRepository getUserRepository() {
+        if (ur == null) {
+            ur = new UserRepository(connection, new UserRepositoryMapper(), uow);
         }
-        return plr;
-    }
-
-    public TeamMemberRepository getMemberRepository() {
-        if (tmr == null) {
-            tmr = new TeamMemberRepository(connection, new TeamMemberMapper(), uow);
-        }
-        return tmr;
+        return ur;
     }
 
     public TeamRepository getTeamRepository() {

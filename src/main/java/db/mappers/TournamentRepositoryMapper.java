@@ -26,29 +26,31 @@ public class TournamentRepositoryMapper implements IMapResultSetIntoEntity<Tourn
     @Override
     public Tournament map(ResultSet rs) {
 
-        YoungFifaChampions.LOG.addLog(this, Logger.LogType.DEBUG, "map");
+//        YoungFifaChampions.LOG.addLog(this, Logger.LogType.DEBUG, "map");
 
         Integer id;
         Date tournamentDate;
-        String description;
-        Integer groundId;
         Integer organizerId;
+        String address;
+        String name;
+        
 
         try {
 
             id = rs.getInt("ID");
             tournamentDate = rs.getDate("TOURNAMENT_DATE");
-            description = rs.getString("DESCRIPTION");
-            groundId = rs.getInt("GROUND_ID");
             organizerId = rs.getInt("ORGANIZER_ID");
+            address = rs.getString("ADDRESS");
+            name= rs.getString("NAME");
+            
 
         } catch (SQLException e) {
-            YoungFifaChampions.LOG.addLog(this, Logger.LogType.ERROR, "map");
+//            YoungFifaChampions.LOG.addLog(this, Logger.LogType.ERROR, "map");
             //never returns null cause log stops app
             return null;
         }
 
-        return new Tournament(id, tournamentDate, description, organizerId, groundId);
+        return new Tournament(id, tournamentDate,address, organizerId, name);
 
     }
 

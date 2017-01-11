@@ -7,7 +7,7 @@ package db.mappers;
 
 import com.mycompany.youngfifachampions.Logger;
 import com.mycompany.youngfifachampions.YoungFifaChampions;
-import db.classes.Team;
+import db.classes.User;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -15,27 +15,29 @@ import java.sql.SQLException;
  *
  * @author Tmejs (mateusz.rzad@gmail.com)
  */
-public class TeamRepositoryMapper implements IMapResultSetIntoEntity<Team> {
+public class UserRepositoryMapper implements IMapResultSetIntoEntity<User> {
 
     @Override
-    public Team map(ResultSet rs) {
-//        YoungFifaChampions.LOG.addLog(this, Logger.LogType.DEBUG, "map");
+    public User map(ResultSet rs) {
 
-        Integer id;
-        String name;
-        Integer userId;
+//         YoungFifaChampions.LOG.addLog(this, Logger.LogType.DEBUG, "map");
+        Integer id=null;
+        String login=null;
+        String password=null;
+        String email=null;
 
         try {
-            id = rs.getInt("ID");
-            name = rs.getString("NAME");
-            userId = rs.getInt("ID_USER");
+                id = rs.getInt("ID");
+                login = rs.getString("LOGIN");
+                password = rs.getString("PASSWORD");
+                email = rs.getString("EMAIL");
         } catch (SQLException e) {
 //            YoungFifaChampions.LOG.addLog(this, Logger.LogType.ERROR, "map");
-            //never returns null cause log stops app
+            System.err.println(e);
             return null;
         }
 
-        return new Team(id, name, userId);
+        return new User(id, login, password, email);
 
     }
 

@@ -23,7 +23,7 @@ public class TournamentTeamRepository extends RepositoryBase<TournamentTeam> {
 
     
 
-    private final static String TABLE_NAME = "TORUNAMENT_TEAMS";
+    private final static String TABLE_NAME = "TOURNAMENT_TEAMS";
 
     @Override
     public String createTableSql() {

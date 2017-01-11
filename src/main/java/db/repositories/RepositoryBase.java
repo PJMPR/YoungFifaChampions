@@ -42,7 +42,7 @@ public abstract class RepositoryBase<TEntity extends IHaveId> implements IReposi
 
     protected RepositoryBase(Connection connection,
             IMapResultSetIntoEntity<TEntity> mapper, IUnitOfWork uow) {
-        YoungFifaChampions.LOG.addLog(this, Logger.LogType.DEBUG, "RepositoryBase()");
+//        YoungFifaChampions.LOG.addLog(this, Logger.LogType.DEBUG, "RepositoryBase()");
         this.connection = connection;
         this.uow = uow;
         try {
@@ -55,13 +55,13 @@ public abstract class RepositoryBase<TEntity extends IHaveId> implements IReposi
             selectAll = connection.prepareStatement(getAllSql());
             connection.commit();
         } catch (SQLException ex) {
-            YoungFifaChampions.LOG.addLog(this, Logger.LogType.ERROR, ex);
+//            YoungFifaChampions.LOG.addLog(this, Logger.LogType.ERROR, ex);
         }
     }
 
     @Override
     public void createTableIfnotExists() throws SQLException {
-        YoungFifaChampions.LOG.addLog(this, Logger.LogType.DEBUG, "createTableIfnotExists()");
+//        YoungFifaChampions.LOG.addLog(this, Logger.LogType.DEBUG, "createTableIfnotExists()");
 
         Statement createTable = this.connection.createStatement();
         boolean tableExists = false;
@@ -82,7 +82,7 @@ public abstract class RepositoryBase<TEntity extends IHaveId> implements IReposi
 
     @Override
     public List<TEntity> getAll() {
-        YoungFifaChampions.LOG.addLog(this, Logger.LogType.DEBUG, "getAll()");
+//        YoungFifaChampions.LOG.addLog(this, Logger.LogType.DEBUG, "getAll()");
         try {
             ResultSet rs = selectAll.executeQuery();
             List<TEntity> result = new ArrayList<TEntity>();
@@ -156,7 +156,7 @@ public abstract class RepositoryBase<TEntity extends IHaveId> implements IReposi
 
     @Override
     public void insert(TEntity entity) throws SQLException {
-        YoungFifaChampions.LOG.addLog(this, Logger.LogType.DEBUG, "insert()");
+//        YoungFifaChampions.LOG.addLog(this, Logger.LogType.DEBUG, "insert()");
 
         insertPrepare(entity);
 
@@ -177,14 +177,14 @@ public abstract class RepositoryBase<TEntity extends IHaveId> implements IReposi
 
     @Override
     public void deletePrepare(TEntity entity) throws SQLException {
-        YoungFifaChampions.LOG.addLog(this, Logger.LogType.DEBUG, "deletePrepare()");
+//        YoungFifaChampions.LOG.addLog(this, Logger.LogType.DEBUG, "deletePrepare()");
 
         delete.setInt(1, entity.getId());
     }
 
     @Override
     public void getPrepare(TEntity entity) throws SQLException {
-        YoungFifaChampions.LOG.addLog(this, Logger.LogType.DEBUG, "getPrepare()");
+//        YoungFifaChampions.LOG.addLog(this, Logger.LogType.DEBUG, "getPrepare()");
         selectById.setInt(1, entity.getId());
     }
 
