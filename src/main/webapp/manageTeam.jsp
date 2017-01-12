@@ -1,6 +1,5 @@
-<%@page import="java.util.List"%>
-<%@page import="domain.model.Person"%>
-<%@page import="domain.model.Wallet"%>
+<%@page import="db.classes.Team"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -11,19 +10,12 @@
 </head>
 <body>
 	<%
-	    Person person = (Person) session.getAttribute("person");
-	    List<Wallet> wallets = (List) session.getAttribute("wallets");
+	   Team team = (Team) session.getAttribute("TEAM");
 	%>
-	<h1>Name: <%=person.getName() %></h1>
-	<h1>Surname: <%=person.getSurname() %></h1>
-	<h1>Wallets:</h1>
-	<ol>
-		<%for(Wallet wallet: wallets){ %>
-			<li><%=wallet.getAsset() %> <%=wallet.getCurrency() %></li>
-		<%} %>
-	</ol>
-	<form action="DbServlet" method="get">
-	<input type="submit" value="Wyślij">
+        <form action="modifyTeamServlet" method="get">
+	
+            <input name="name" value="<%=team.getName()%>" /><br />
+	<input type="submit" value="Zmien">
 	</form>
 </body>
 </html>

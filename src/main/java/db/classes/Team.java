@@ -14,7 +14,7 @@ public class Team implements IHaveId {
     //Class params
     private final Integer id;
 
-    private final String name;
+    private String name;
     
     private final Integer idUsera;
 
@@ -38,6 +38,11 @@ public class Team implements IHaveId {
         return idUsera;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    
     
 
 }

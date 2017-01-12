@@ -49,22 +49,20 @@ public class AddUserServlet extends HttpServlet {
             UserRepository ur = repo.getUserRepository();
             ur.add(new User(login, password, email));
             repo.saveAndQuit();
-            
+
             //Pobieramy nowo powstałego usera na podstawie lginu
             newUser = ur.getUserByName(login);
-            
-            
+
             if (newUser != null) {
                 req.getSession().setAttribute("USER", newUser);
-                
+
                 //Pobranie drużyny usera - zrobione tutaj bo jakis problem z tranzakcjami i z 
                 // account.jsp czasami daje nula
                 TeamRepository tr = repo.getTeamRepository();
-                
+
                 Team team = tr.getTeamByUserId(newUser.getId());
-                if (team != null) {
-                    req.getSession().setAttribute("TEAM", team);
-                }
+
+                req.getSession().setAttribute("TEAM", team);
 
             } else {
                 //Tutaj jakiś błąd logowania więc redirect

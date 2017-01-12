@@ -11,11 +11,10 @@
 </head>
 <body>
 	<%
-	    Person person = (Person) session.getAttribute("person");
-	    List<Wallet> wallets = (List) session.getAttribute("wallets");
+	    Team team = (Team) session.getAttribute("TEAM");
+	    
 	%>
-	<h1>Name: <%=person.getName() %></h1>
-	<h1>Surname: <%=person.getSurname() %></h1>
+	<h1>Turnieje%></h1>
 	<h1>Wallets:</h1>
 	<ol>
 		<%for(Wallet wallet: wallets){ %>
